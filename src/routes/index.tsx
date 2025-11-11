@@ -1,39 +1,22 @@
+import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import logo from '../logo.svg'
+import Canvas from '../components/Canvas'
+import type { Element } from '../types/types'
 
 export const Route = createFileRoute('/')({
   component: App,
 })
 
-function App() {
+export default function App() {
+  const [elements, setElements] = useState<Element[]>([])
+  const [selectedId, setSelectedId] = useState<number | null>(null)
+
   return (
-    <div className="text-center">
-      <header className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]">
-        <img
-          src={logo}
-          className="h-[40vmin] pointer-events-none animate-[spin_20s_linear_infinite]"
-          alt="logo"
-        />
-        <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
-        </p>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://tanstack.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn TanStack
-        </a>
-      </header>
-    </div>
+    <Canvas
+      elements={elements}
+      setElements={setElements}
+      selectedId={selectedId}
+      setSelectedId={setSelectedId}
+    />
   )
 }
